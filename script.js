@@ -23,43 +23,45 @@ function cacular_descuento_importe(importe) {
 
 function gestor_compras() {
     // Inicialización de variables: 
-    
+    let validacion = true;
     // Contador para el número de operaciones
     let numero_operaciones = 0;
-    
+
     // Inicializo la opción a 
     let opcion = 0;
-    
+
     // Inicializo el gasto total a 0
     let gasto_total = 0;
-    
+
     // Inicializo el gasto medio a 0
     let gasto_medio = 0;
-    
+
     //Inicializo el gasto_mayor a un número muy pequeño (menos infinito) 
     // para que la primera vez la condición que cambie el valor del gasto mayor por el importe del producto 
     let gasto_mayor = -Infinity;
-    
+
     //Inicializo el gasto_menor a un número muy grande (más infinito) 
     // para que la primera vez la condición que cambie el valor del gasto menor por el importe del producto
     let gasto_menor = Infinity;
-    
+
     do {
+        do {
+            // 1. Pedir al usuario el precio de un producto
 
-        // 1. Pedir al usuario el precio de un producto
+            const precio_producto = window.prompt("Introduzca el precio del producto: ");
 
-        const precio_producto = window.prompt("Introduzca el precio del producto: ");
-        const comprueba_precio = isNaN(precio_producto);
-        if(comprueba_precio){
-            console.error("El precio del producto debe ser un número");
-        }
-        // 2. Pedir la cantidad de unidades
+            if (isNaN(precio_producto) || precio_producto < 0) {
+                console.error("El precio del producto debe ser un número y debe ser positivo");
+            }
+            // 2. Pedir la cantidad de unidades
 
-        const cantidad_unidades = window.prompt("Introduzca la cantidad de unidades del producto que ha comprado: ");
-        const comprueba_unidades = isNaN(cantidad_unidades);
-        if(comprueba_unidades){
-            console.error("La cantidad de unidades del producto debe ser un número");
-        }
+            const cantidad_unidades = window.prompt("Introduzca la cantidad de unidades del producto que ha comprado: ");
+
+            if (isNaN(cantidad_unidades) || cantidad_unidades < 0) {
+                console.error("La cantidad de unidades del producto debe ser un número y debe ser positivo");
+            }
+        } while (!validacion);
+
         // 3. Calcular el importe de la compra
 
         let importe = precio_producto * cantidad_unidades;
@@ -79,10 +81,10 @@ function gestor_compras() {
 
         gasto_total += importe_con_iva_aplicado;
 
-        if(importe_con_iva_aplicado > gasto_mayor){
+        if (importe_con_iva_aplicado > gasto_mayor) {
             gasto_mayor = importe_con_iva_aplicado;
         }
-        if(importe_con_iva_aplicado < gasto_menor){
+        if (importe_con_iva_aplicado < gasto_menor) {
             gasto_menor = importe_con_iva_aplicado;
         }
 
