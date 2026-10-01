@@ -103,5 +103,3 @@ function gestor_compras() {
 }
 
 gestor_compras();
-
-
